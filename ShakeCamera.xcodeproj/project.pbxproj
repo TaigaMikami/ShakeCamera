@@ -14,6 +14,7 @@
 		F94A546F1EA89ED800A1D041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94A546D1EA89ED800A1D041 /* LaunchScreen.storyboard */; };
 		F94A547A1EA89ED800A1D041 /* ShakeCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94A54791EA89ED800A1D041 /* ShakeCameraTests.swift */; };
 		F94A54851EA89ED800A1D041 /* ShakeCameraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94A54841EA89ED800A1D041 /* ShakeCameraUITests.swift */; };
+		F94A54931EA8A08100A1D041 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94A54921EA8A08100A1D041 /* ExtensionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		F94A54801EA89ED800A1D041 /* ShakeCameraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShakeCameraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94A54841EA89ED800A1D041 /* ShakeCameraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeCameraUITests.swift; sourceTree = "<group>"; };
 		F94A54861EA89ED800A1D041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F94A54921EA8A08100A1D041 /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				F94A546B1EA89ED800A1D041 /* Assets.xcassets */,
 				F94A546D1EA89ED800A1D041 /* LaunchScreen.storyboard */,
 				F94A54701EA89ED800A1D041 /* Info.plist */,
+				F94A54921EA8A08100A1D041 /* ExtensionViewController.swift */,
 			);
 			path = ShakeCamera;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				F94A54671EA89ED800A1D041 /* ViewController.swift in Sources */,
 				F94A54651EA89ED800A1D041 /* AppDelegate.swift in Sources */,
+				F94A54931EA8A08100A1D041 /* ExtensionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
