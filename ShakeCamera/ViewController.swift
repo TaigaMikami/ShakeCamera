@@ -9,13 +9,22 @@
 
 import UIKit
 import AVFoundation
+import CoreMotion
 
 class ViewController: UIViewController{
     // プレビュー用のビューとOutlet接続しておく
     @IBOutlet weak var previewView: UIView!
+    
+    // 加速度の測定値
+    @IBOutlet weak var xAccelLabel: UILabel!
+    
     // インスタンスの作成
     var session = AVCaptureSession()
     var photoOutput = AVCapturePhotoOutput()
+    
+    // CoreMotionマネージャを作る
+    let cmManager = CMMotionManager()
+    
     // 通知センターを作る
     let notification = NotificationCenter.default
     
@@ -25,6 +34,17 @@ class ViewController: UIViewController{
         if session.isRunning {
             return
         }
+        
+        // キューを実行する間隔（秒数）
+        cmManager.deviceMotionUpdateInterval = 0.1
+        
+        // キューで実行するクロージャ
+        let handler:CMDeviceMotionHandler = {(motionData:CMDeviceMotion?, error:Error?) -> Void in
+            self.motionAnimation(motionData, error: error as NSError?)
+        }
+        // 更新で実行するキューを登録してモーションセンサーをスタートする
+        cmManager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: handler)
+
         // 入出力の設定
         setupInputOutput()
         // プレビューレイヤの設定
@@ -37,15 +57,38 @@ class ViewController: UIViewController{
                                  name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
-    // シャッターボタンで実行する
-    @IBAction func takePhoto(_ sender: Any) {
-        let captureSetting = AVCapturePhotoSettings()
-        captureSetting.flashMode = .auto
-        captureSetting.isAutoStillImageStabilizationEnabled = true
-        captureSetting.isHighResolutionPhotoEnabled = false
-        // キャプチャのイメージ処理はデリゲートに任せる
-        photoOutput.capturePhoto(with: captureSetting, delegate: self)
+    // デバイスモーションセンサーで定期的に実行するメソッド
+    func motionAnimation(_ motionData:CMDeviceMotion?, error:NSError?) {
+        if let motion = motionData {
+            
+            // 加速度センサー（移動加速度）
+            // X軸方向加速度
+            var accelX = motion.userAcceleration.x
+            accelX = round(accelX*1000)/1000
+            xAccelLabel.text = String(accelX)
+            if accelX > 0.5{
+                let captureSetting = AVCapturePhotoSettings()
+                captureSetting.flashMode = .auto
+                captureSetting.isAutoStillImageStabilizationEnabled = true
+                captureSetting.isHighResolutionPhotoEnabled = false
+                //キャプチャのイメージ処理はデリゲートに任せる
+                photoOutput.capturePhoto(with: captureSetting, delegate: self)
+            }
+
+        }
+        
     }
+    
+    
+//    // シャッターボタンで実行する
+//    @IBAction func takePhoto(_ sender: Any) {
+//        let captureSetting = AVCapturePhotoSettings()
+//        captureSetting.flashMode = .auto
+//        captureSetting.isAutoStillImageStabilizationEnabled = true
+//        captureSetting.isHighResolutionPhotoEnabled = false
+//        // キャプチャのイメージ処理はデリゲートに任せる
+//        photoOutput.capturePhoto(with: captureSetting, delegate: self)
+//    }
     
     // 入出力の設定
     func setupInputOutput(){
