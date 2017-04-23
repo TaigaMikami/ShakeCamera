@@ -27,6 +27,7 @@ extension ViewController:AVCapturePhotoCaptureDelegate {
             if let stillImage = UIImage(data: data) {
                 // アルバムに追加する
                 UIImageWriteToSavedPhotosAlbum(stillImage, self, nil, nil)
+                shareImage = stillImage
             }
         }
     }

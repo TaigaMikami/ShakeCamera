@@ -19,6 +19,7 @@ class ViewController: UIViewController{
     @IBOutlet weak var xAccelLabel: UILabel!
     
     // インスタンスの作成
+    var shareImage:UIImage?
     var session = AVCaptureSession()
     var photoOutput = AVCapturePhotoOutput()
     
@@ -90,6 +91,21 @@ class ViewController: UIViewController{
 //        photoOutput.capturePhoto(with: captureSetting, delegate: self)
 //    }
     
+    
+    @IBAction func shareAction(_ sender: Any) {
+        // シェアボタンで実行する
+        guard let shareImage = shareImage else {
+            return
+        }
+        // シェアする内容を作る
+        let sharedText = "シェアします。"
+        let activities = [sharedText as AnyObject, shareImage]
+        let appActivities = [UIActivity()]
+        // アクティビティコントローラを表示する
+        let activityVC = UIActivityViewController(activityItems:activities, applicationActivities: appActivities)
+        self.present(activityVC, animated: true, completion: nil)
+        
+    }
     // 入出力の設定
     func setupInputOutput(){
         //解像度の指定
@@ -158,6 +174,7 @@ class ViewController: UIViewController{
             }
         }
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
