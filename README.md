@@ -1,7 +1,7 @@
 # ShakeCamera
 
-| Left align | Right align | Center align |
-|:-----------|------------:|:------------:|
-| 一般的なカメラアプリ | Right align | Center align |
-| ShakeCamera     |        This |     This     |
+| カメラ種類         | トリガー |
+|:-----------|------------:|
+| 一般的なカメラアプリ | ボタン |
+| ShakeCamera     |　モーションセンサー |
 
